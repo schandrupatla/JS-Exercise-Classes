@@ -42,7 +42,22 @@ class Airplane {
   */
   
  class Person {
-    
+  constructor(name, age){
+    this.name = name;
+    this.age = age;
+    this.stomach =[];
+  }
+    eat(food){
+      if(this.stomach.length < 10){
+        this.stomach.push(food);
+      }
+    }
+    poop(){
+      this.stomach = [];
+    }
+    toString(){
+     return `${this.name}, ${this.age}`;
+    }
   }
   
   /*
@@ -60,9 +75,30 @@ class Airplane {
   */
   
  class Car {
-    
+  constructor(model, mpg){
+    this.model = model;
+    this.milesPerGallon = mpg;
+    this.tank = 0;
+    this.odometer = 0;
   }
-  
+  fill(gallons){
+    this.tank = this.tank + gallons;
+  }
+  drive(distance){
+    const drivableMiles = this.tank * this.milesPerGallon;
+    if(distance <= drivableMiles){
+      this.odometer = this.odometer + distance;
+      this.tank = this.tank - (distance/this.milesPerGallon);
+    }
+    else {
+      this.odometer = this.odometer + drivableMiles;
+      this.tank = 0;
+      //console.log(`I ran out of fuel at ${this.odometer} miles! `);
+      return `I ran out of fuel at ${this.odometer} miles! `;
+    }
+  }//drive
+}
+//const c1 = new Car('tesla', 20);
   /*
     TASK 3
       - Write a Lambdasian class.
@@ -76,7 +112,14 @@ class Airplane {
           + {name} and {location} of course come from the instance's own properties.
   */
  class Lambdasian {
-    
+    constructor(attrs){
+      this.name = attrs.name;
+      this.age = attrs.age;
+      this.location = attrs.location;
+    }
+    speak(){
+      return `Hello my name is ${this.name}, I am from ${this.location}`;
+    }  
   }
   
   /*
@@ -93,8 +136,20 @@ class Airplane {
           + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
           + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
   */
- class Instructor {
-
+ class Instructor extends Lambdasian{
+   constructor(instructorAttributes){
+     super(instructorAttributes);
+     this.specialty = instructorAttributes.specialty;
+     this.favLanguage = instructorAttributes.favLanguage;
+     this.catchPhrase = instructorAttributes.catchPhrase;
+  }
+  demo(subject){
+    return `Today we are learning about ${subject}`;
+  }
+  grade(student, subject){
+   //console.log("grade from PM",+`${student.name} receives a perfect score on ${subject}`);
+    return `${student.name} receives a perfect score on ${subject}`;
+  }
  }
   /*
     TASK 5
@@ -111,9 +166,38 @@ class Airplane {
           + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
           + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
   */
- class Student {
-     
+ class Student extends Lambdasian{
+   constructor(studentAttrs){
+     super(studentAttrs);
+     this.previousBackground = studentAttrs.previousBackground;
+     this.className = studentAttrs.className;
+     this.favSubjects = studentAttrs.favSubjects;
+     this.grade = Math.floor(Math.random () * (100 -1+1)+1);//STRETCH
+   }
+   listSubjects(){
+     return `Loving ${this.favSubjects}!`;
+   }
+   PRAssignment(subject){
+    //console.log("Name : "+ this.name);
+    return `${this.name} has submitted a PR for ${subject}`;
+   }
+   sprintChallenge(subject) {
+    // console.log(`${this.name} has begun sprint challenge on ${subject}`);
+    return `${this.name} has begun sprint challenge on ${subject}`;
+   }
+   graduate(grade){
+      if(grade >70){
+        console.log("Student graduated!!");
+      }
+      else{
+        console.log("Student scored below 70%, needs to evaluate his assignments");
+      }
+    }
+   
  }
+
+//  const s1 = new Student('sri',25,'San jose');
+//  s1.sprintChallenge('History');
   
   /*
     TASK 6
@@ -128,9 +212,32 @@ class Airplane {
           + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
           + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
   */
- class ProjectManager {
-     
- }
+//  class ProjectManager extends Instructor{
+//    constructor({name,age,location,specialty,favLanguage,catchPhrase,gradClassName,favInstructor}){
+//      super({name,age,location,specialty,favLanguage,catchPhrase})
+//      this.gradClassName = gradClassName;
+//      this.favInstructor =favInstructor;
+//    }
+//    standUp(channel){
+//      return `${this.name} announces to ${channel}, @channel standy times!`;
+//    }
+//    debugsCode(student, subject){
+//     return `${this.name} debugs ${student.name}'s code on ${subject}`;
+//    }
+//  }
+class ProjectManager extends Instructor{
+  constructor(pmAttrs){
+    super(pmAttrs)
+    this.gradClassName = pmAttrs.gradClassName;
+    this.favInstructor = pmAttrs.favInstructor;
+  }
+  standUp(channel){
+    return `${this.name} announces to ${channel}, @channel standy times!`;
+  }
+  debugsCode(student, subject){
+   return `${this.name} debugs ${student.name}'s code on ${subject}`;
+  }
+}
   /*
     STRETCH PROBLEM (no tests!)
       - Extend the functionality of the Student by adding a prop called grade and setting it equal to a number between 1-100.
@@ -139,6 +246,23 @@ class Airplane {
         + This method, when called, will check the grade of the student and see if they're ready to graduate from Lambda School
         + If the student's grade is above a 70% let them graduate! Otherwise go back to grading their assignments to increase their score.
   */
+ const studentAttr = {
+  name: 'Matt',
+  age: 30,
+  location: 'London',
+  previousBackground: 'Plumber',
+  className: 'WebEU 3',
+  favSubjects: ['JS', 'Node', 'Redux']
+}
+  // const s1 = new Student(studentAttr);
+  // s1.grade = Math.floor(Math.random () * (100 -1+1)+1);
+  // console.log("S1-grade:",s1.grade);
+  // s1.graduate(70);
+  // s1.graduate() =  function(grade){
+  //   if(grade >70){
+  //     console.log("Student graduated");
+  //   }
+  // }
 
 
   //End of Challenge
