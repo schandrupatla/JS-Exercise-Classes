@@ -93,12 +93,10 @@ class Airplane {
     else {
       this.odometer = this.odometer + drivableMiles;
       this.tank = 0;
-      //console.log(`I ran out of fuel at ${this.odometer} miles! `);
       return `I ran out of fuel at ${this.odometer} miles! `;
     }
   }//drive
 }
-//const c1 = new Car('tesla', 20);
   /*
     TASK 3
       - Write a Lambdasian class.
@@ -147,7 +145,6 @@ class Airplane {
     return `Today we are learning about ${subject}`;
   }
   grade(student, subject){
-   //console.log("grade from PM",+`${student.name} receives a perfect score on ${subject}`);
     return `${student.name} receives a perfect score on ${subject}`;
   }
  }
@@ -178,11 +175,9 @@ class Airplane {
      return `Loving ${this.favSubjects}!`;
    }
    PRAssignment(subject){
-    //console.log("Name : "+ this.name);
     return `${this.name} has submitted a PR for ${subject}`;
    }
    sprintChallenge(subject) {
-    // console.log(`${this.name} has begun sprint challenge on ${subject}`);
     return `${this.name} has begun sprint challenge on ${subject}`;
    }
    graduate(grade){
@@ -195,10 +190,7 @@ class Airplane {
     }
    
  }
-
-//  const s1 = new Student('sri',25,'San jose');
-//  s1.sprintChallenge('History');
-  
+ 
   /*
     TASK 6
       - Write a ProjectManager class extending Instructor.
@@ -212,19 +204,7 @@ class Airplane {
           + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
           + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
   */
-//  class ProjectManager extends Instructor{
-//    constructor({name,age,location,specialty,favLanguage,catchPhrase,gradClassName,favInstructor}){
-//      super({name,age,location,specialty,favLanguage,catchPhrase})
-//      this.gradClassName = gradClassName;
-//      this.favInstructor =favInstructor;
-//    }
-//    standUp(channel){
-//      return `${this.name} announces to ${channel}, @channel standy times!`;
-//    }
-//    debugsCode(student, subject){
-//     return `${this.name} debugs ${student.name}'s code on ${subject}`;
-//    }
-//  }
+
 class ProjectManager extends Instructor{
   constructor(pmAttrs){
     super(pmAttrs)
@@ -246,23 +226,7 @@ class ProjectManager extends Instructor{
         + This method, when called, will check the grade of the student and see if they're ready to graduate from Lambda School
         + If the student's grade is above a 70% let them graduate! Otherwise go back to grading their assignments to increase their score.
   */
- const studentAttr = {
-  name: 'Matt',
-  age: 30,
-  location: 'London',
-  previousBackground: 'Plumber',
-  className: 'WebEU 3',
-  favSubjects: ['JS', 'Node', 'Redux']
-}
-  // const s1 = new Student(studentAttr);
-  // s1.grade = Math.floor(Math.random () * (100 -1+1)+1);
-  // console.log("S1-grade:",s1.grade);
-  // s1.graduate(70);
-  // s1.graduate() =  function(grade){
-  //   if(grade >70){
-  //     console.log("Student graduated");
-  //   }
-  // }
+
 
 
   //End of Challenge
